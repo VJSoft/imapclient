@@ -1,0 +1,26 @@
+{
+    "name": "vjsoft/imapclient",
+    "description": "laravel imap client",
+    "authors": [
+        {
+            "name": "jerry",
+            "email": "jerry@vjsoft.net"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vjsoft\\Imapclient\\Providers\\ImapClientServiceProvider"
+            ]
+        }
+    },
+  "autoload": {
+    "psr-4": {
+      "Vjsoft\\Imapclient\\": "src"
+    }
+  },
+  "require": {
+      "illuminate/support": "~5.1",
+      "php" : ">=5.3.0"
+    }
+}
