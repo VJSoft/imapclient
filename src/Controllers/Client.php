@@ -1,81 +1,47 @@
 <?php
 
-namespace Vjsoft\Imapclient;
+namespace Vjsoft\Imapclient\Controllers;
 
 use Illuminate\Support\Facades\Config;
 
-//use Zalazdi\LaravelImap\Exceptions\ConnectionFailedException;
-//use Zalazdi\LaravelImap\Exceptions\GetMessagesFailedException;
+use Vjsoft\Imapclient\Exceptions\ConnectionFailedException;
+use Vjsoft\Imapclient\Exceptions\GetMessagesFailedException;
 
 class Client
 {
-    /**
-     * @var bool|resource
-     */
     protected $connection = false;
 
-    /**
-     * Server hostname.
-     *
-     * @var string
+    /*
+     *  Server details
      */
     public $host;
 
-    /**
-     * Server port.
-     *
-     * @var int
-     */
     public $port;
 
-    /**
-     * Server encryption.
-     * Supported: none, ssl or tls.
-     *
-     * @var string
-     */
     public $encryption;
 
-    /**
-     * If server has to validate cert.
-     *
-     * @var mixed
-     */
     public $validate_cert;
 
+
     /**
-     * Account username/
-     *
-     * @var mixed
+     * User credentials
      */
     public $username;
 
-    /**
-     * Account password.
-     *
-     * @var string
-     */
     public $password;
 
-    /**
-     * Read only parameter.
-     *
-     * @var bool
+
+    /*
+     * some
      */
     protected $read_only = false;
 
-    /**
-     * Active folder.
-     *
-     * @var Folder
-     */
     protected $activeFolder = false;
 
-    /**
-     * Client constructor.
-     *
-     * @param array $config
-     */
+
+// -----------------------------------------------
+
+
     public function __construct($config = [])
     {
         $this->host = $config['host'];
@@ -86,39 +52,21 @@ class Client
         $this->password = $config['password'];
     }
 
-    /**
-     * Set read only property and reconnect if it's necessary.
-     *
-     * @param bool $readOnly
-     */
     public function setReadOnly($readOnly = true)
     {
         $this->read_only = $readOnly;
     }
 
-    /**
-     * Determine if connection was established.
-     *
-     * @return bool
-     */
     public function isConnected()
     {
         return ($this->connection) ? true : false;
     }
 
-    /**
-     * Determine if connection is in read only mode.
-     *
-     * @return bool
-     */
     public function isReadOnly()
     {
         return $this->read_only;
     }
 
-    /**
-     * Determine if connection was established and connect if not.
-     */
     public function checkConnection()
     {
         if (!$this->isConnected()) {
@@ -126,14 +74,6 @@ class Client
         }
     }
 
-    /**
-     * Connect to server.
-     *
-     * @param int $attempts
-     *
-     * @return $this
-     * @throws ConnectionFailedException
-     */
     public function connect($attempts = 3)
     {
         if ($this->isConnected()) {
@@ -157,11 +97,6 @@ class Client
         return $this;
     }
 
-    /**
-     * Disconnect from server.
-     *
-     * @return $this
-     */
     public function disconnect()
     {
         if ($this->isConnected()) {
@@ -171,15 +106,6 @@ class Client
         return $this;
     }
 
-    /**
-     * Get folders list.
-     * If hierarchical order is set to true, it will make a tree of folders, otherwise it will return flat array.
-     *
-     * @param bool $hierarchical
-     * @param null $parent_folder
-     *
-     * @return array
-     */
     public function getFolders($hierarchical = true, $parent_folder = null)
     {
         $this->checkConnection();
@@ -198,7 +124,7 @@ class Client
             if ($hierarchical && $folder->hasChildren()) {
                 $pattern = $folder->fullName.$folder->delimiter.'%';
 
-                $children = $this->getFolders(true, $pattern);
+                $children = $this->getFolders(true, $pattern);  //todo: da checkna dali towa ne e bug?!
                 $folder->setChildren($children);
             }
             $folders[] = $folder;
@@ -207,12 +133,8 @@ class Client
         return $folders;
     }
 
-    /**
-     * Open folder.
-     *
-     * @param Folder $folder
-     */
-    public function openFolder(Folder $folder)
+
+    public function openFolder(Folder $folder) //todo: tuj da wzema da go razkaram
     {
         $this->checkConnection();
 
@@ -223,15 +145,6 @@ class Client
         }
     }
 
-    /**
-     * Get messages from folder.
-     *
-     * @param Folder $folder
-     * @param string $criteria
-     *
-     * @return array
-     * @throws GetMessagesFailedException
-     */
     public function getMessages(Folder $folder, $criteria = 'ALL')
     {
         $this->checkConnection();
@@ -256,22 +169,11 @@ class Client
         }
     }
 
-    /**
-     * Get option for imap_open and imap_reopen.
-     * It supports only isReadOnly feature.
-     *
-     * @return int
-     */
     protected function getOptions()
     {
         return ($this->isReadOnly()) ? OP_READONLY : 0;
     }
 
-    /**
-     * Get full address of mailbox.
-     *
-     * @return string
-     */
     protected function getAddress()
     {
         $address = "{".$this->host.":".$this->port."/imap";

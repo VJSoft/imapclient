@@ -1,6 +1,6 @@
 <?php
 
-namespace Vjsoft\Imapclient;
+namespace Vjsoft\Imapclient\Controllers;
 
 use Carbon\Carbon;
 

@@ -4,40 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita0dd74e808a91322f10432690cc1ddcb
+class ComposerStaticInit242b6542921eccf4e2356794995d8c11
 {
-    public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'V' => 
         array (
             'Vjsoft\\Imapclient\\' => 18,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\Translation\\' => 30,
-        ),
-        'P' => 
-        array (
-            'Psr\\SimpleCache\\' => 16,
-            'Psr\\Container\\' => 14,
-        ),
-        'I' => 
-        array (
-            'Illuminate\\Support\\' => 19,
-            'Illuminate\\Contracts\\' => 21,
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Inflector\\' => 26,
-        ),
-        'C' => 
-        array (
-            'Carbon\\' => 7,
         ),
     );
 
@@ -46,45 +18,13 @@ class ComposerStaticInita0dd74e808a91322f10432690cc1ddcb
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\Translation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/translation',
-        ),
-        'Psr\\SimpleCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
-        ),
-        'Psr\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'Illuminate\\Support\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/illuminate/support',
-        ),
-        'Illuminate\\Contracts\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/illuminate/contracts',
-        ),
-        'Doctrine\\Common\\Inflector\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
-        ),
-        'Carbon\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
-        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita0dd74e808a91322f10432690cc1ddcb::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita0dd74e808a91322f10432690cc1ddcb::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit242b6542921eccf4e2356794995d8c11::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit242b6542921eccf4e2356794995d8c11::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

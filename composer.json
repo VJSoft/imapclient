@@ -1,9 +1,11 @@
 {
     "name": "vjsoft/imapclient",
     "description": "laravel imap client",
+    "license" : "MIT",
+    "keywords" : ["imap", "laravel"],
     "authors": [
         {
-            "name": "jerry",
+            "name": "Jerry Stamatov",
             "email": "jerry@vjsoft.net"
         }
     ],
@@ -16,11 +18,11 @@
     },
   "autoload": {
     "psr-4": {
-      "Vjsoft\\Imapclient\\": "src"
+      "Vjsoft\\Imapclient\\": "src/"
     }
   },
   "require": {
       "illuminate/support": "~5.1",
-      "php" : ">=5.3.0"
+      "php" : ">=5.4.0"
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
-namespace vjsoft\imapclient\Providers;
+namespace Vjsoft\Imapclient\Providers;
 
 use Illuminate\Support\ServiceProvider;
+
+use Vjsoft\Imapclient\Controllers\ImapClientPackageManager;
+use Vjsoft\Imapclient\Controllers\Client;
 
 class ImapClientServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,15 @@ class ImapClientServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(ImapClientPackageManager::class, function ($app) {
+            return new ImapClientPackageManager($app);
+        });
+
+        $this->app->singleton(Client::class, function ($app) {
+            return $app[ImapClientPackageManager::class]->account();
+        });
+
+
+
     }
 }
