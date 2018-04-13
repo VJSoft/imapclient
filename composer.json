@@ -1,7 +1,6 @@
 {
     "name": "vjsoft/imapclient",
     "description": "laravel imap client",
-    "version": "1.0.5",
     "license" : "MIT",
     "keywords" : ["imap", "laravel"],
     "authors": [
