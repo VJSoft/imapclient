@@ -17,7 +17,7 @@ class ImapClientServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../\config/imap.php' => config_path('imap.php'),
+            __DIR__.'/../\config/imap.php' => config_path('imap.php'),
         ]);
     }
 
