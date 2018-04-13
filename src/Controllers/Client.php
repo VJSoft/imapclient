@@ -138,16 +138,16 @@ class Client
     }
 
 
-//    public function openFolder(Folder $folder) //todo: tuj da wzema da go razkaram
-//    {
-//        $this->checkConnection();
-//
-//        if ($this->activeFolder != $folder) {
-//            $this->activeFolder = $folder;
-//
-//            imap_reopen($this->connection, $folder->path, $this->getOptions(), 3);
-//        }
-//    }
+    public function openFolder(Folder $folder) //todo: tuj da wzema da go razkaram
+    {
+        $this->checkConnection();
+
+        if ($this->activeFolder != $folder) {
+            $this->activeFolder = $folder;
+
+            imap_reopen($this->connection, $folder->path, $this->getOptions(), 3);
+        }
+    }
 
     public function getFolderByName($folderName)
     {
