@@ -16,6 +16,7 @@ class ImapClientServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //копираме аймап конфига, което може би няма да ни трябва..
         $this->publishes([
             __DIR__.'/../config/imap.php' => config_path('imap.php'),
         ]);
