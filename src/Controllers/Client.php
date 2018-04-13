@@ -9,7 +9,11 @@ use Vjsoft\Imapclient\Exceptions\GetMessagesFailedException;
 
 class Client
 {
-    protected $connection = false;
+ /*
+  * connection should be public - doesnt work as protected
+  */
+
+    public $connection = false;
 
     /*
      *  Server details
