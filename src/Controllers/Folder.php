@@ -22,16 +22,16 @@ class Folder
      */
     public $no_inferiors;
 
-    /**
-     * folder is a container, not a mailbox. cannot open it.
-     */
-    public $no_select;
+    public $no_select;    // folder is a container, not a mailbox. cannot open it.
 
     public $marked;
 
     public $has_children;
 
     public $referal;
+
+    public $folder_imap_status;
+
 
 //--------------------------------------------------------------------------------
     public function __construct(Client $client, $folder)

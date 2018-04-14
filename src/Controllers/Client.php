@@ -131,6 +131,8 @@ class Client
                 $children = $this->getFolders(true, $pattern);  //todo: da checkna dali towa ne e bug?!
                 $folder->setChildren($children);
             }
+            $folder->folder_imap_status = imap_status($this->connection, $folder->path, SA_ALL);
+
             $folders[] = $folder;
         }
 
