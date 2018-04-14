@@ -30,7 +30,7 @@ class Folder
 
     public $referal;
 
-    public $folder_imap_status;
+    public $imap_status;
 
 
 //--------------------------------------------------------------------------------
