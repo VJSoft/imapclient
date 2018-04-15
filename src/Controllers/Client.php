@@ -162,6 +162,38 @@ class Client
         }
         return false;
     }
+/*
+ * getMessagesList() - NEW method:  utilizes imap_fetch_overview() function, instead of imap_search
+ *                                  taking only the message info, without setting it as read while only displaying the message list
+ */
+    public function getMessagesList(Folder $folder){
+        $this->checkConnection();
+
+        try {
+            $this->openFolder($folder);
+
+            $folderData = imap_check($this->connection);
+            $msgCount = $folderData->Nmsgs;
+            $listStart = $msgCount-10;
+
+            /*
+             * we take the last portion of the messages list - they are the newest.
+             * The portion size should be a parameter, related to pagination - depends how many message u want to display on the page
+             */
+            $availableMessages = imap_fetch_overview($this->connection, "$listStart:$msgCount", SE_UID);
+
+            /*
+             * Then we reverse the array so the newest are on top
+             */
+            return array_reverse($availableMessages,true);
+
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+
+            throw new GetMessagesFailedException($errorMessage);
+        }
+
+    }
 
     public function getMessages(Folder $folder, $criteria = 'ALL')
     {
