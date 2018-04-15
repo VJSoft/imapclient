@@ -32,6 +32,8 @@ class Folder
 
     public $imap_status;
 
+    public $folderData;
+
 
 //--------------------------------------------------------------------------------
     public function __construct(Client $client, $folder)
@@ -44,7 +46,15 @@ class Folder
         $this->name = $this->getSimpleName($this->delimiter, $this->fullName);
 
         $this->parseAttributes($folder->attributes);
+
     }
+
+    public function setFolderData(){
+
+        $this->client->openFolder($this);
+        $this->folderData = imap_check($this->client->connection);
+    }
+
 
     public function hasChildren()
     {
@@ -82,4 +92,29 @@ class Folder
         $this->referal      = ($attributes & LATT_REFERRAL)     ? true : false;
         $this->has_children = ($attributes & LATT_HASCHILDREN)  ? true : false;
     }
+
+    /*
+     * getMessagesList() - NEW method:  utilizes imap_fetch_overview() function, instead of imap_search
+     *                                  taking only the message info, without setting it as read while only displaying the message list
+     */
+    public function getMessagesList(){
+
+        $this->setFolderData();
+
+        $msgCount = $this->folderData->Nmsgs+1;
+        $listStart = $msgCount-9;  //todo: implement pagination
+
+        /*
+         * we take the last portion of the messages list - they are the newest.
+         * The portion size should be a parameter, related to pagination - depends how many message u want to display on the page
+         */
+        $availableMessages = imap_fetch_overview($this->client->connection, "$listStart:$msgCount", SE_UID);
+
+        /*
+         * Then we reverse the array so the newest are on top
+         */
+        return array_reverse($availableMessages);
+
+    }
+
 }
