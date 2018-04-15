@@ -4,7 +4,7 @@ namespace Vjsoft\Imapclient\Controllers;
 
 class Folder
 {
-    protected $client;
+    public $client;
 
     public $path;
 

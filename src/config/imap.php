@@ -6,12 +6,17 @@ return [
 
     'accounts' => [
         'default' => [
-            'host' => 'mail.example.com',
-            'port' => 993,
-            'encryption' => 'ssl', // Supported: false, 'ssl', 'tls'
-            'validate_cert' => true,
-            'username' => 'zalazdi@example.com',
-            'password' => 'PASSWORD',
+            'host'  => env('IMAP_HOST', 'localhost'),
+            'port'  => env('IMAP_PORT', 993),
+            'encryption'    => env('IMAP_ENCRYPTION', 'ssl'), // Supported: false, 'ssl', 'tls'
+            'validate_cert' => env('IMAP_VALIDATE_CERT', true),
+
+//            'username' => env('IMAP_USERNAME', 'root@example.com'),
+//            'password' => env('IMAP_PASSWORD', ''),
+
+        //todo: tuk da slojim integraciqta s User class-a.
+            'username' => env('IMAP_USERNAME', 'root@example.com'),
+            'password' => env('IMAP_PASSWORD', ''),
         ],
 
         'gmail' => [
@@ -31,5 +36,14 @@ return [
             'username' => '',
             'password' => '',
         ]
+    ],
+    'icons' => [
+        "Inbox" => "fa fa-inbox",
+        "Sent" => "glyphicon glyphicon-share",
+        "Drafts" => "fa fa-envelope-o",
+        "Spam" => "fa fa-ban",
+        "Trash" => "fa fa-trash-o",
+        "Archive" => "fa fa-trash-o",
+        "Junk" => "fa fa-trash-o",
     ],
 ];
