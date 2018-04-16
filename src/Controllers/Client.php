@@ -163,7 +163,7 @@ class Client
         $folders = $this->getFolders(false);
         foreach($folders as $folder)
         {
-            if ($folder->fullName == $folderName) {
+            if ($folder->name == $folderName) {
                 return $folder;
             }
         }
