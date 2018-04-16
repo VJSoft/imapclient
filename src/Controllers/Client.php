@@ -126,7 +126,7 @@ class Client
             $folder = new Folder($this, $item);
 
             if ($hierarchical && $folder->hasChildren()) {
-                $pattern = $folder->fullName.$folder->delimiter.'%';
+                $pattern = $folder->name.$folder->delimiter.'%';
 
                 $children = $this->getFolders(true, $pattern);  //todo: da checkna dali towa ne e bug?!
                 $folder->setChildren($children);
