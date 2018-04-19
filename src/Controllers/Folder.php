@@ -97,24 +97,35 @@ class Folder
      * getMessagesList() - NEW method:  utilizes imap_fetch_overview() function, instead of imap_search
      *                                  taking only the message info, without setting it as read while only displaying the message list
      */
-    public function getMessagesList(){
+    public function getMessagesList($messagesPerPage = 10, $page = 1){
 
         $this->setFolderData();
 
-        $msgCount = $this->folderData->Nmsgs+1;
-        $listStart = $msgCount-9;  //todo: implement pagination
+        $msgCount = $this->folderData->Nmsgs;
+        $listStart = $msgCount-$messagesPerPage+1;  //todo: implement pagination
+        $listStart = max([1,$listStart]);
 
         /*
          * we take the last portion of the messages list - they are the newest.
          * The portion size should be a parameter, related to pagination - depends how many message u want to display on the page
          */
-        $availableMessages = imap_fetch_overview($this->client->connection, "$listStart:$msgCount", SE_UID);
+        $availableMessages = imap_fetch_overview($this->client->connection, "$listStart:$msgCount", 0);
+        //$availableMessages = imap_fetch_overview($this->client->connection, "1:10", 0);
 
         /*
          * Then we reverse the array so the newest are on top
          */
         return array_reverse($availableMessages);
-
     }
+
+ /*
+  * method appendToSentFolder()
+  * Since IMAP protocol does not support send message function, the user usually implements sending by
+  * external code.
+  * This method adds the message sent by another handler to the Sent Folder of the mailbox
+  */
+//    public function appendToFolder($message){
+//        imap_append($this->client, $this->path, $message);
+//    }
 
 }
