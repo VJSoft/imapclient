@@ -212,4 +212,9 @@ class Client
 
         return $address;
     }
+
+    public function deleteMessage($uid){
+        $this->checkConnection();
+        return imap_delete($this->connection, $uid, FT_UID);
+    }
 }
