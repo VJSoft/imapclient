@@ -102,7 +102,10 @@ class Folder
         $this->setFolderData();
 
         $msgCount = $this->folderData->Nmsgs;
-        $listStart = $msgCount-$messagesPerPage+1;  //todo: implement pagination
+        if(!$msgCount) return [];
+
+        $listEnd = $msgCount - ($page-1)*$messagesPerPage;
+        $listStart = $listEnd-$messagesPerPage+1;  //todo: implement pagination
         $listStart = max([1,$listStart]);
 
         /*
