@@ -112,7 +112,7 @@ class Folder
          * we take the last portion of the messages list - they are the newest.
          * The portion size should be a parameter, related to pagination - depends how many message u want to display on the page
          */
-        $availableMessages = imap_fetch_overview($this->client->connection, "$listStart:$msgCount", 0);
+        $availableMessages = imap_fetch_overview($this->client->connection, "$listStart:$listEnd", 0);
         //$availableMessages = imap_fetch_overview($this->client->connection, "1:10", 0);
 
         /*
