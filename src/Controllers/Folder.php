@@ -43,7 +43,7 @@ class Folder
         $this->delimiter = $folder->delimiter;
         $this->path = $folder->name;
         $this->fullName = $this->decodeName($folder->name);
-        $this->name = $this->getSimpleName($this->delimiter, $this->fullName);
+        $this->name = ucfirst($this->getSimpleName($this->delimiter, $this->fullName));
 
         $this->parseAttributes($folder->attributes);
 

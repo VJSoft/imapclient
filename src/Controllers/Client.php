@@ -126,7 +126,7 @@ class Client
         foreach ($items as $item) {
             $folder = new Folder($this, $item);
 
-            if ($orderPosition = array_search(ucfirst($folder->name), config('imap')['order']);){
+            if ($orderPosition = array_search($folder->name, config('imap')['order'])){
 
 //                if ($hierarchical && $folder->hasChildren()) {
 //                    $pattern = $folder->name.$folder->delimiter.'%';
