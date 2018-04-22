@@ -42,6 +42,8 @@ class Client
 
     protected $activeFolder = false;
 
+    public $folders;
+
 
 // -----------------------------------------------
 
@@ -140,6 +142,9 @@ class Client
             }
         }
 
+        ksort($folders);
+        $this->folders = $folders;
+
         return $folders;
     }
 
@@ -164,14 +169,22 @@ class Client
 
     public function getFolderByName($folderName)
     {
-        $folders = $this->getFolders(false);
-        foreach($folders as $folder)
-        {
-            if ($folder->name == $folderName) {
-                return $folder;
-            }
+        $folderNames = [];
+        foreach ($this->folders as $key=>$folder){
+            $folderNames[$key] = $folder->name;
         }
-        return false;
+
+        return $this->folders[array_search($folderName, $folderNames)];
+//        $key = array_search($folderName, $this->folders);
+//        if ($key)
+//        $folders = $this->getFolders(false);
+//        foreach($folders as $folder)
+//        {
+//            if ($folder->name == $folderName) {
+//                return $folder;
+//            }
+//        }
+//        return false;
     }
 
     public function getMessages(Folder $folder, $criteria = 'ALL')
