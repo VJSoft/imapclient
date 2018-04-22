@@ -55,5 +55,5 @@ return [
         "Archive" => 5,
         "Junk" => 6
     ],
-    'order' => ["Inbox", "Sent", "Drafts", "Spam", "Trash", "Archive", "Junk"],
+    'order' => ["0", "Inbox", "Sent", "Drafts", "Spam", "Trash", "Archive", "Junk"],
 ];
