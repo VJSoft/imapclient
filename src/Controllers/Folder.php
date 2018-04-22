@@ -118,7 +118,7 @@ class Folder
         /*
          * Then we reverse the array so the newest are on top
          */
-        return array_reverse($availableMessages);
+        return array_reverse($availableMessages, 1);
     }
 
  /*
