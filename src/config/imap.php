@@ -46,4 +46,14 @@ return [
         "Archive" => "fa fa-trash-o",
         "Junk" => "fa fa-trash-o",
     ],
+    'order_assoc' => [
+        "Inbox" => 0,
+        "Sent" => 1,
+        "Drafts" => 2,
+        "Spam" => 3,
+        "Trash" => 4,
+        "Archive" => 5,
+        "Junk" => 6
+    ],
+    'order' => ["Inbox", "Sent", "Drafts", "Spam", "Trash", "Archive", "Junk"],
 ];

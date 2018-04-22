@@ -122,18 +122,22 @@ class Client
         }
 
         $items = imap_getmailboxes($this->connection, $this->getAddress(), $pattern);
+
         foreach ($items as $item) {
             $folder = new Folder($this, $item);
 
-            if ($hierarchical && $folder->hasChildren()) {
-                $pattern = $folder->name.$folder->delimiter.'%';
+            if ($orderPosition = array_search(ucfirst($folder->name), config('imap')['order']);){
 
-                $children = $this->getFolders(true, $pattern);  //todo: da checkna dali towa ne e bug?!
-                $folder->setChildren($children);
+//                if ($hierarchical && $folder->hasChildren()) {
+//                    $pattern = $folder->name.$folder->delimiter.'%';
+//
+//                    $children = $this->getFolders(true, $pattern);
+//                    $folder->setChildren($children);
+//                }
+                $folder->imap_status = imap_status($this->connection, $folder->path, SA_ALL);
+
+                $folders[$orderPosition] = $folder;
             }
-            $folder->imap_status = imap_status($this->connection, $folder->path, SA_ALL);
-
-            $folders[] = $folder;
         }
 
         return $folders;
