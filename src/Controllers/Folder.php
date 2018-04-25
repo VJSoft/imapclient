@@ -119,6 +119,19 @@ class Folder
         return array_reverse($availableMessages, 1);
     }
 
+    /*
+     * method checkUnseen()
+     *
+     *
+     * @return integer - number of unseen/unread messages
+     */
+public function checkUnseen(){
+
+    $this->setFolderData();
+
+    return count(imap_search($this->client->connection,"UNSEEN"));
+}
+
  /*
   * method appendToSentFolder()
   * Since IMAP protocol does not support send message function, the user usually implements sending by

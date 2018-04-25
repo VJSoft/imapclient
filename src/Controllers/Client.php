@@ -160,7 +160,6 @@ class Client
 
             } catch (\Exception $e) {
                 $errorMessage = $e->getMessage();
-
                 throw new GetMessagesFailedException($errorMessage);
             }
 
