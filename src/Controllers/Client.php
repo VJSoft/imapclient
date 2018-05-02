@@ -149,7 +149,7 @@ class Client
     }
 
 
-    public function openFolder(Folder $folder) //todo: tuj da wzema da go razkaram
+    public function openFolder(Folder $folder)
     {
         $this->checkConnection();
 
@@ -168,14 +168,6 @@ class Client
 
     public function getFolderByName($folderName)
     {
-//        $folderNames = [];
-//        foreach ($this->folders as $key=>$folder){
-//            $folderNames[$key] = $folder->name;
-//        }
-//
-//        return $this->folders[array_search($folderName, $folderNames)];
-//        $key = array_search($folderName, $this->folders);
-//        if ($key)
         $folders = $this->getFolders(false);
         foreach($folders as $folder)
         {

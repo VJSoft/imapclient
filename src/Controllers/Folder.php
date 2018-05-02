@@ -128,8 +128,9 @@ class Folder
 public function checkUnseen(){
 
     $this->setFolderData();
-
-    return count(imap_search($this->client->connection,"UNSEEN"));
+    if ($arr=imap_search($this->client->connection,"UNSEEN")){
+        return count($arr);
+    } else return 0;
 }
 
  /*
