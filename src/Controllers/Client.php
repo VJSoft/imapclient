@@ -82,22 +82,19 @@ class Client
 
     public function connect($attempts = 3)
     {
-        if ($this->isConnected()) {
-            $this->disconnect();
-        }
-
-        try {
-            $this->connection = imap_open(
-                $this->getAddress(),
-                $this->username,
-                $this->password,
-                $this->getOptions(),
-                $attempts
-            );
-        } catch (\ErrorException $e) {
-            $message = $e->getMessage().'. '.implode("; ", imap_errors());
-
-            throw new ConnectionFailedException($message);
+        if (!$this->isConnected()) {
+            try {
+                $this->connection = imap_open(
+                    $this->getAddress(),
+                    $this->username,
+                    $this->password,
+                    $this->getOptions(),
+                    $attempts
+                );
+            } catch (\Exception $e) {
+                $message = $e->getMessage().'. '.implode("; ", imap_errors());
+                throw new ConnectionFailedException($message, $e->getCode());
+            }
         }
 
         return $this;
@@ -197,7 +194,6 @@ class Client
             return $messages;
         } catch (\Exception $e) {
             $message = $e->getMessage();
-
             throw new GetMessagesFailedException($message);
         }
     }
